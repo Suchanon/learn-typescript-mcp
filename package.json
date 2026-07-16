@@ -10,6 +10,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@modelcontextprotocol/client": "^2.0.0-beta.4",
     "@modelcontextprotocol/server": "^2.0.0-beta.4",
     "zod": "^4.4.3"
   }

@@ -104,3 +104,9 @@ bun --hot ./index.ts
 ```
 
 For more information, read the Bun API docs in `node_modules/bun-types/docs/**.mdx`.
+
+## Process management preferences
+
+- Never start, stop, or otherwise manage long-running dev servers (MCP servers, MCP Inspector, etc.) on my behalf, even in the background and even to "verify" something works. I run these myself in my own terminal so I control the process lifecycle directly.
+- Instead of running a server/process yourself, just give me the exact command to run.
+- It's fine to use read-only diagnostics (`ps`, `lsof`, checking a port) to help me debug why something isn't behaving as expected, or to point out a leftover/orphaned process by PID — but let me decide whether to kill it, don't kill it yourself unless I ask.
