@@ -1,0 +1,25 @@
+{
+  "name": "@ts-mcp/weather",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "http": "bun src/main.ts",
+    "stdio": "bun src/stdio.ts",
+    "client": "bun client.ts",
+    "test": "bun test",
+    "typecheck": "bun x tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0-beta.4",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/platform-express": "^11.1.6",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "^2.0.0-beta.4",
+    "@types/express": "^5"
+  }
+}

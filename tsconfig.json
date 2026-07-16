@@ -9,6 +9,10 @@
     "allowJs": true,
     "types": ["bun"],
 
+    // NestJS dependency injection (Bun transpiles these per tsconfig too)
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     // Bundler mode
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

@@ -1,0 +1,13 @@
+{
+  "name": "@ts-mcp/tax-assistant",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "stdio": "bun src/main.ts",
+    "typecheck": "bun x tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0-beta.4",
+    "zod": "^4.4.3"
+  }
+}

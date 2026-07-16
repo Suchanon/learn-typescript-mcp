@@ -1,22 +1,17 @@
 {
   "name": "ts-mcp",
-  "module": "index.ts",
-  "type": "module",
   "private": true,
+  "type": "module",
+  "workspaces": ["apps/*"],
   "scripts": {
-    "weather:stdio": "bun tutorial/weather/server-stdio.ts",
-    "weather:http": "bun tutorial/weather/server-http.ts",
-    "weather:client": "bun tutorial/weather/client.ts"
+    "weather:http": "bun apps/weather/src/main.ts",
+    "weather:stdio": "bun apps/weather/src/stdio.ts",
+    "weather:client": "bun apps/weather/client.ts",
+    "tax:stdio": "bun apps/tax-assistant/src/main.ts",
+    "typecheck": "bun x tsc --noEmit -p apps/weather && bun x tsc --noEmit -p apps/tax-assistant"
   },
   "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
+    "@types/bun": "latest",
     "typescript": "^5"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/client": "^2.0.0-beta.4",
-    "@modelcontextprotocol/server": "^2.0.0-beta.4",
-    "zod": "^4.4.3"
   }
 }

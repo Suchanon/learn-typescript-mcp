@@ -1,4 +1,10 @@
 
+# ts-mcp
+
+## Repo layout
+
+Bun-workspaces monorepo: each learning topic is its own app under `apps/*` (currently `apps/weather` — a NestJS MCP server — and `apps/tax-assistant` — a plain stdio MCP server). New topics get a new `apps/<topic>` workspace with its own `package.json`/`tsconfig.json` extending the root ones. NestJS here runs on the Bun runtime directly (no nest-cli/webpack build); this is the one sanctioned exception to the "don't use express" rule below, since Nest's Express adapter is internal to Nest.
+
 Default to using Bun instead of Node.js.
 
 - Use `bun <file>` instead of `node <file>` or `ts-node <file>`
