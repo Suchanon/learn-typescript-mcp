@@ -34,7 +34,11 @@ export function createWeatherServer(): McpServer {
       title: 'Get Weather Alerts',
       description: 'Get the active weather alerts for a US state',
       inputSchema: z.object({
-        state: z.string().length(2).describe('Two-letter US state code, e.g. CA'),
+        state: z
+          .string()
+          .length(2)
+          .describe('Two-letter US state code, e.g. CA')
+          .default('CA'),
       }),
     },
     async ({ state }) => {
@@ -68,8 +72,18 @@ export function createWeatherServer(): McpServer {
       title: 'Get Weather Forecast',
       description: 'Get the weather forecast for a US location by latitude/longitude',
       inputSchema: z.object({
-        latitude: z.number().describe('Latitude of the location'),
-        longitude: z.number().describe('Longitude of the location'),
+        latitude: z
+          .number()
+          .min(-90)
+          .max(90)
+          .describe('Latitude of the location, e.g. 37.7749 (San Francisco)')
+          .default(37.7749),
+        longitude: z
+          .number()
+          .min(-180)
+          .max(180)
+          .describe('Longitude of the location, e.g. -122.4194 (San Francisco)')
+          .default(-122.4194),
       }),
     },
     async ({ latitude, longitude }) => {

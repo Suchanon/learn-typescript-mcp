@@ -1,5 +1,5 @@
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/server';
-import { createWeatherServer } from './weather-tools';
+import { createWeatherServer } from './server';
 
 const PORT = 3000;
 

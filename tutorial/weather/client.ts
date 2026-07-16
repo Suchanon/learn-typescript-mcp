@@ -5,7 +5,7 @@ const client = new Client({ name: 'weather-client', version: '1.0.0' });
 
 const transport = new StdioClientTransport({
   command: 'bun',
-  args: ['tutorial/weather-server.ts'],
+  args: [`${import.meta.dir}/server-stdio.ts`],
 });
 
 await client.connect(transport);
