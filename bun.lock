@@ -9,6 +9,13 @@
         "typescript": "^5",
       },
     },
+    "apps/knowledge-base": {
+      "name": "@ts-mcp/knowledge-base",
+      "dependencies": {
+        "@modelcontextprotocol/server": "^2.0.0-beta.4",
+        "zod": "^4.4.3",
+      },
+    },
     "apps/tax-assistant": {
       "name": "@ts-mcp/tax-assistant",
       "dependencies": {
@@ -53,6 +60,8 @@
     "@tokenizer/inflate": ["@tokenizer/inflate@0.4.1", "", { "dependencies": { "debug": "^4.4.3", "token-types": "^6.1.1" } }, "sha512-2mAv+8pkG6GIZiF1kNg1jAjh27IDxEPKwdGul3snfztFerfPGI1LjDezZp3i7BElXompqEtPmoPx6c2wgtWsOA=="],
 
     "@tokenizer/token": ["@tokenizer/token@0.3.0", "", {}, "sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A=="],
+
+    "@ts-mcp/knowledge-base": ["@ts-mcp/knowledge-base@workspace:apps/knowledge-base"],
 
     "@ts-mcp/tax-assistant": ["@ts-mcp/tax-assistant@workspace:apps/tax-assistant"],
 

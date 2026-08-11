@@ -3,6 +3,12 @@
     "weather": {
       "type": "http",
       "url": "http://localhost:3000/mcp"
+    },
+    "knowledge-base": {
+      "command": "bun",
+      "args": [
+        "apps/knowledge-base/src/main.ts"
+      ]
     }
   }
 }

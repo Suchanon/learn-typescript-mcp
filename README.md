@@ -6,6 +6,7 @@ Learning monorepo for the [Model Context Protocol](https://modelcontextprotocol.
 | --- | --- |
 | [apps/weather/](apps/weather/) | The MCP weather tutorial, restructured as a **NestJS** application (running on the Bun runtime) |
 | [apps/tax-assistant/](apps/tax-assistant/) | A minimal plain-TypeScript stdio MCP server (VAT calculator) |
+| [apps/knowledge-base/](apps/knowledge-base/) | A stdio MCP server backed by `bun:sqlite`, covering tools + resources + a prompt (notes with tags) |
 
 To install dependencies for all workspaces:
 
@@ -66,6 +67,20 @@ Minimal stdio MCP server with a single `calculate-vat` tool (Thai VAT 7%):
 bun run tax:stdio
 ```
 
+## Knowledge base (`apps/knowledge-base/`)
+
+Persistent notes-with-tags server backed by `bun:sqlite` ([apps/knowledge-base/src/db.ts](apps/knowledge-base/src/db.ts), [apps/knowledge-base/src/notes.ts](apps/knowledge-base/src/notes.ts)). Unlike weather/tax-assistant, this app exercises all three MCP primitives:
+
+- **Tools** (actions a client explicitly calls): `add-note`, `get-note`, `search-notes`, `list-notes`, `delete-note`, `add-tags`, `list-tags`
+- **Resources** (data a client can pull into context without a tool call): `kb://notes` (JSON index of every note) and the `kb://notes/{id}` template (one note as markdown)
+- **Prompts** (reusable message templates a client can surface as a menu item): `summarize-notes-by-tag`, which embeds matching notes' content into the generated prompt
+
+The SQLite file (`apps/knowledge-base/knowledge-base.sqlite`, plus its `-wal`/`-shm` sidecars) is created on first run and gitignored — each clone starts with an empty knowledge base.
+
+```bash
+bun run kb:stdio
+```
+
 ## Inspect/test with MCP Inspector
 
 ```bash
@@ -78,6 +93,32 @@ Opens a browser UI (proxy on port 6277, UI on port 6274). In the sidebar, connec
 - **HTTP**: Transport Type `Streamable HTTP`, URL `http://localhost:3000/mcp` — requires the HTTP server (`bun run weather:http`) to already be running
 
 Inspector remembers your last-used connection in the browser and auto-reconnects with it on load/refresh — always check the sidebar's Transport Type/URL before assuming what it's actually connected to.
+
+To switch between this repo's stdio servers without retyping Command/Args each time, use [mcp.inspector.json](mcp.inspector.json) (same `mcpServers` shape as [.mcp.json](.mcp.json)):
+
+```bash
+bunx @modelcontextprotocol/inspector --config mcp.inspector.json --server knowledge-base
+# or --server weather / --server tax-assistant
+```
+
+There's no in-UI dropdown to swap servers from a config file — picking a different one means relaunching with a different `--server` value.
+
+### Inspecting multiple servers at once
+
+One Inspector instance connects to exactly one server. To inspect two or three at the same time, run separate instances on separate ports (`CLIENT_PORT`/`SERVER_PORT`) and open each in its own browser tab:
+
+```bash
+# terminal 1
+CLIENT_PORT=6274 SERVER_PORT=6277 bunx @modelcontextprotocol/inspector --config mcp.inspector.json --server weather
+
+# terminal 2
+CLIENT_PORT=6280 SERVER_PORT=6281 bunx @modelcontextprotocol/inspector --config mcp.inspector.json --server tax-assistant
+
+# terminal 3
+CLIENT_PORT=6282 SERVER_PORT=6283 bunx @modelcontextprotocol/inspector --config mcp.inspector.json --server knowledge-base
+```
+
+Each opens its UI on its own port (`http://localhost:6274`, `:6280`, `:6282`) — leaving `CLIENT_PORT`/`SERVER_PORT` unset on more than one instance will collide on the 6274/6277 defaults.
 
 If you get `PORT IS IN USE` on 6274/6277, a previous Inspector instance didn't shut down cleanly (it can leave its proxy process orphaned even after reporting failure). Find and kill it before retrying:
 

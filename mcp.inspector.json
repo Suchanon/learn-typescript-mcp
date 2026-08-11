@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "weather": {
+      "command": "bun",
+      "args": ["apps/weather/src/stdio.ts"]
+    },
+    "tax-assistant": {
+      "command": "bun",
+      "args": ["apps/tax-assistant/src/main.ts"]
+    },
+    "knowledge-base": {
+      "command": "bun",
+      "args": ["apps/knowledge-base/src/main.ts"]
+    }
+  }
+}
