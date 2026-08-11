@@ -1,7 +1,8 @@
 import { Database } from 'bun:sqlite';
 
 // Sits next to package.json, not in src/ — import.meta.dir is this file's own directory.
-const dbPath = `${import.meta.dir}/../knowledge-base.sqlite`;
+// KB_DB_PATH overrides it so tests run against a throwaway database instead of real notes.
+const dbPath = process.env.KB_DB_PATH ?? `${import.meta.dir}/../knowledge-base.sqlite`;
 
 export const db = new Database(dbPath, { create: true, strict: true });
 db.exec('PRAGMA journal_mode = WAL;');
