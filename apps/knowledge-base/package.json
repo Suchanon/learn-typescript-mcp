@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "stdio": "bun src/main.ts",
+    "test": "bun test",
     "typecheck": "bun x tsc --noEmit -p ."
   },
   "dependencies": {

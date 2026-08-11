@@ -9,6 +9,7 @@
     "weather:client": "bun apps/weather/client.ts",
     "tax:stdio": "bun apps/tax-assistant/src/main.ts",
     "kb:stdio": "bun apps/knowledge-base/src/main.ts",
+    "test": "bun test",
     "typecheck": "bun x tsc --noEmit -p apps/weather && bun x tsc --noEmit -p apps/tax-assistant && bun x tsc --noEmit -p apps/knowledge-base"
   },
   "devDependencies": {
